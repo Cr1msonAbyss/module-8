@@ -1,0 +1,39 @@
+<Window.Resources>
+    <Style x:Key="WatermarkedTextBox" TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <TextBox x:Name="textBox"
+                                 Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="Transparent"
+                                 Foreground="{TemplateBinding Foreground}"
+                                 BorderThickness="2"
+                                 VerticalContentAlignment="Center"/>
+                        <TextBlock x:Name="watermark"
+                                   Text="Введите задачу"
+                                   Foreground="Gray"
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   VerticalAlignment="Center"
+                                   Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="watermark" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter TargetName="watermark" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="watermark" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter TargetName="watermark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</Window.Resources>
